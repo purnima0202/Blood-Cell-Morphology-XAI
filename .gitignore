@@ -1,0 +1,24 @@
+# API keys and credentials
+kaggle.json
+client_secrets.json
+token.json
+.env
+
+# JSON files with sensitive paths
+good_files.json
+
+# Large data files
+*.csv
+metadata.csv
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# System files
+.DS_Store
+Thumbs.db
