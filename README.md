@@ -1,36 +1,60 @@
 # Blood-Cell-Morphology-XAI
-# Multimodal Explainable AI for Blood Cell Morphology Classification
+Every prediction is transparent, auditable, and explainable — with counterfactual reasoning ("this cell would be normal if the nucleus were 23% smaller").
 
-Masters dissertation project — University of Limerick
+---
 
+## 🛠️ What I Built
 
-## Project Overview
-Building an interpretable AI system for bone marrow cell classification
-using Structured Grammatical Evolution (SGE) and engineered image features.
+**Computer Vision** — Training-free cell segmentation (nucleus, cytoplasm, whole cell) using CMYK/HLS colour space transformations and Otsu thresholding, following Tarquino et al. (2024).
 
-## Dataset
-Matek et al. (2021) Bone Marrow Cytomorphology Dataset
-- 3 classes: BLA (blast/malignant), NGS (neutrophil/normal), LYT (lymphocyte/normal)
-- 1000 images per class = 3000 total after quality filtering
+**Feature Engineering** — Extracted **84 features per cell** across 3 regions: shape (area, solidity, roundness), colour (RGB channel statistics), and texture (GLCM contrast, entropy).
 
-## Current Progress
-- [x] Dataset downloaded and filtered
-- [x] Cell segmentation (nucleus, cytoplasm, whole cell)
-- [x] Feature extraction — 84 features per cell
-- [x] metadata.csv saved
-- [ ] SVM baseline classifier
-- [ ] ResNet-18 baseline
-- [ ] SGE with BNF grammar
+**Quality Pipeline** — Automated single-cell filtering using connected-component analysis; reproducible dataset construction with fixed random seed.
+
+**Classification** *(in progress)* — SVM baseline, ResNet-18 deep learning baseline, and interpretable SGE classifier.
+
+---
+
+## 📊 Dataset
+
+Matek et al. (2021) Bone Marrow Cytomorphology — 171,374 expert-annotated images.
+
+| Class | Type | Role |
+|-------|------|------|
+| BLA | 🔴 Malignant | Blast cells (leukaemia indicator) |
+| NGS | 🟢 Normal | Segmented neutrophils |
+| LYT | 🟢 Normal | Lymphocytes |
+
+Working set: **3,000 quality-filtered images** (1,000 per class).
+
+---
+
+## ✅ Progress
+
+- [x] Data pipeline — download, filter, reproducible sampling
+- [x] Cell segmentation (3 regions)
+- [x] Feature extraction — 84 features → `metadata.csv`
+- [ ] SVM & ResNet-18 baselines
+- [ ] SGE interpretable classifier
 - [ ] Counterfactual explanation module
 - [ ] Streamlit prototype
 
-## Feature Extraction
-Following Tarquino et al. (2024) — 84 features per cell:
-- Shape features (8 per region)
-- Colour features (15 per region)
-- Texture/GLCM features (5 per region)
-- 3 regions: whole cell, nucleus, cytoplasm
+---
 
-## Reference
-Tarquino et al. (2024) Engineered feature embeddings meet deep learning.
-Journal of Pathology Informatics 15, 100390.
+## 💻 Tech Stack
+
+`Python` · `OpenCV` · `scikit-image` · `scikit-learn` · `PyTorch` · `sge3` · `Streamlit`
+
+---
+
+## 🚀 Run It
+
+1. Open `01_Data_Preparation_And_Feature_Extraction.ipynb` in Google Colab
+2. Add your `kaggle.json` API key
+3. Run all → `metadata.csv` generated
+
+---
+
+## 📚 References
+
+Tarquino et al. (2024), *J. Pathology Informatics* · Matek et al. (2021), *Blood* · Lourenço et al. (2016), *Genetic Programming and Evolvable Machines*
